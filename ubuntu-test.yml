@@ -3,10 +3,12 @@
     hosts: localhost
     connection: local 
     tasks:
-      copy:
-        content: ""
-        dest: /etc/nologin
-        force: false
-        group: sys
-        owner: root
-        mode: 0555
+
+    - name: "copy a blank file"
+        copy:
+          content: ""
+          dest: /home/ansible_proof
+          force: false
+          group: sys
+          owner: root
+          mode: 0555
