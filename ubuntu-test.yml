@@ -1,0 +1,4 @@
+- name: Touch a test file
+  ansible.builtin.file:
+    path: /home/test0.txt
+    state: touch
