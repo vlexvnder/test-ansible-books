@@ -1,8 +1,12 @@
-- name: Touch a test file
-  ansible.builtin.file:
-    path: /home/test0.txt
-    state: touch
-- name: install package
-  apt:
-    name: python3-pip
-    state: present
+---
+  - name: "Playing with Ansible and Git"
+    hosts: localhost
+    connection: local 
+    tasks:
+      copy:
+        content: ""
+        dest: /etc/nologin
+        force: false
+        group: sys
+        owner: root
+        mode: 0555
