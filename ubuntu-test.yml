@@ -1,14 +1,11 @@
 ---
-  - name: "Playing with Ansible and Git"
-    hosts: localhost
-    connection: local 
-    tasks:
+- name: Create an empty file locally
+  hosts: localhost
+  connection: local
+  gather_facts: false
 
-    - name: "copy a blank file"
-        copy:
-          content: ""
-          dest: /home/ansible_proof
-          force: false
-          group: sys
-          owner: root
-          mode: 0555
+  tasks:
+    - name: Create the file
+      file:
+        path: /home/ansible_proof
+        state: touch
