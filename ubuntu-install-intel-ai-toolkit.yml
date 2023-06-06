@@ -1,0 +1,23 @@
+---
+- name: Install Intel AI Toolkit
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Add Example GPG key
+      ansible.builtin.get_url:
+        url: https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        dest: /etc/apt/keyrings/oneapi-archive-keyring.gpg
+        mode: '0644'
+        force: true
+    - name: Add Example repo
+      ansible.builtin.apt_repository:
+        filename: oneapi
+        repo: 'deb [signed-by=/etc/apt/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main'
+    
+    - name: Install apache httpd  (state=present is optional)
+        ansible.builtin.apt:
+          name: intel-aikit
+          state: present
+          update_cache: true
