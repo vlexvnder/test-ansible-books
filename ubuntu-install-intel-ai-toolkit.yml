@@ -8,13 +8,13 @@
     - name: Add Example GPG key
       ansible.builtin.get_url:
         url: https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-        dest: /etc/apt/keyrings/oneapi-archive-keyring.gpg
+        dest: /usr/share/keyrings/oneapi-archive-keyring.gpg
         mode: '0644'
         force: true
     - name: Add Example repo
       ansible.builtin.apt_repository:
         filename: oneapi
-        repo: 'deb [signed-by=/etc/apt/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main'
+        repo: 'deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main'
     
     - name: Install intel AI kit
       ansible.builtin.apt:
