@@ -17,7 +17,7 @@
         repo: 'deb [signed-by=/etc/apt/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main'
     
     - name: Install intel AI kit
-        ansible.builtin.apt:
-          name: intel-aikit
-          state: present
-          update_cache: true
+      ansible.builtin.apt:
+        name: intel-aikit
+        state: present
+        update_cache: true
