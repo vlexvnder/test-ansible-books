@@ -5,17 +5,11 @@
   gather_facts: false
 
   tasks:
-    - name: Add Example GPG key
-      ansible.builtin.get_url:
-        url: https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
-        dest: /usr/share/keyrings/oneapi-archive-keyring.gpg
-        mode: '0644'
-        force: true
-    - name: Add Example repo
-      ansible.builtin.apt_repository:
-        filename: oneapi
-        repo: 'deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main'
-    
+    - name: Add Intel GPG key
+      shell: wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \ | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+      changed_when: false
+    - name: Add Intel OneAPI repo
+      shell: echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
     - name: Install intel AI kit
       ansible.builtin.apt:
         name: intel-aikit
