@@ -23,8 +23,8 @@
   gather_facts: false
 
   tasks:
-  - name: Add environment variable script to profile
-    copy:
-      dest: "/etc/profile.d/oneapi-env-vars"
-      content: |
-        source /opt/intel/oneapi/setvars.sh
+    - name: Add environment variable script to profile
+      copy:
+        dest: "/etc/profile.d/oneapi-env-vars"
+        content: |
+          source /opt/intel/oneapi/setvars.sh
