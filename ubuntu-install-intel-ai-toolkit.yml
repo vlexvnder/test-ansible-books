@@ -18,7 +18,7 @@
           - gcc
           - g++
           - make
-        state: present
+        state: latest
         update_cache: true
 
 - name: Install miniconda
