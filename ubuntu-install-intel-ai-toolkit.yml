@@ -1,5 +1,7 @@
 ---
 - name: Install prerequisite packages
+  hosts: local
+  connection: local
   tasks:
     - name: Install packages
       ansible.builtin.apt:
@@ -14,6 +16,8 @@
       update_cache: true
 
 - name: Install Intel AI Toolkit
+  hosts: local
+  connection: local
   tasks:
     - name: Add Intel GPG key
       shell: wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \ | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
@@ -29,6 +33,8 @@
         update_cache: true
 
 - name: Install miniconda
+  hosts: local
+  connection: local
   tasks:
     - name: Download miniconda
       shell: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
@@ -40,6 +46,8 @@
         creates: $HOME/miniconda
 
 - name: Set environment variables
+  hosts: local
+  connection: local
   tasks:
     - name: Add environment variable script to profile
       copy:
