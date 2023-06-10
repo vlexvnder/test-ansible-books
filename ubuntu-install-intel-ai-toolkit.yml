@@ -1,20 +1,4 @@
 ---
-- name: Install prerequisite packages
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Install packages
-      ansible.builtin.apt:
-        pkg:
-          - vim
-          - python3.9
-          - pip
-          - gcc
-          - g++
-          - make
-        state: latest
-        update_cache: true
-
 - name: Install Intel AI Toolkit
   hosts: localhost
   connection: local
@@ -31,6 +15,23 @@
           - intel-aikit
         state: present
         update_cache: true
+        
+- name: Install prerequisite packages
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        pkg:
+          - vim
+          - python3-pip
+          - gcc
+          - g++
+          - make
+        state: latest
+        update_cache: true
+
+
 
 - name: Install miniconda
   hosts: localhost
