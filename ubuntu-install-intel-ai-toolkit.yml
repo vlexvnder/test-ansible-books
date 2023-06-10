@@ -15,7 +15,7 @@
           - intel-aikit
         state: present
         update_cache: true
-        
+
 - name: Install prerequisite packages
   hosts: localhost
   connection: local
@@ -30,8 +30,6 @@
           - make
         state: latest
         update_cache: true
-
-
 
 - name: Install miniconda
   hosts: localhost
