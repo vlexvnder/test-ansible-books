@@ -1,6 +1,6 @@
 ---
 - name: Install prerequisite packages
-  hosts: local
+  hosts: localhost
   connection: local
   tasks:
     - name: Install packages
@@ -16,7 +16,7 @@
         update_cache: true
 
 - name: Install Intel AI Toolkit
-  hosts: local
+  hosts: localhost
   connection: local
   tasks:
     - name: Add Intel GPG key
@@ -33,7 +33,7 @@
         update_cache: true
 
 - name: Install miniconda
-  hosts: local
+  hosts: localhost
   connection: local
   tasks:
     - name: Download miniconda
@@ -46,7 +46,7 @@
         creates: $HOME/miniconda
 
 - name: Set environment variables
-  hosts: local
+  hosts: localhost
   connection: local
   tasks:
     - name: Add environment variable script to profile
