@@ -8,27 +8,17 @@
       changed_when: false
     - name: Add Intel OneAPI repo
       shell: echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-    - name: Install intel AI kit
+    - name: Install intel AI kit and other packages
       ansible.builtin.apt:
         pkg:
           - intel-basekit
           - intel-aikit
-        state: present
-        update_cache: true
-
-- name: Install prerequisite packages
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Install packages
-      ansible.builtin.apt:
-        pkg:
           - vim
           - python3-pip
           - gcc
           - g++
           - make
-        state: latest
+        state: present
         update_cache: true
 
 - name: Install miniconda
