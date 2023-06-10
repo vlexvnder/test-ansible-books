@@ -1,9 +1,19 @@
 ---
-- name: Install Intel AI Toolkit
-  hosts: localhost
-  connection: local
-  gather_facts: false
+- name: Install prerequisite packages
+  tasks:
+    - name: Install packages
+      ansible.builtin.apt:
+        pkg:
+          - vim
+          - python3.9
+          - pip
+          - gcc
+          - g++
+          - make   
+      state: latest
+      update_cache: true
 
+- name: Install Intel AI Toolkit
   tasks:
     - name: Add Intel GPG key
       shell: wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \ | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
@@ -12,18 +22,27 @@
       shell: echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
     - name: Install intel AI kit
       ansible.builtin.apt:
-        name: intel-aikit
+        pkg:
+          - intel-basekit
+          - intel-aikit
         state: present
         update_cache: true
 
+- name: Install miniconda
+  tasks: 
+    - name: Download miniconda
+      shell: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+      args:
+        creates: ~/miniconda.sh
+    - name: Install miniconda
+      shell: bash ~/miniconda.sh -b -p $HOME/miniconda
+      args:
+        creates: $HOME/miniconda
+        
 - name: Set environment variables
-  hosts: localhost
-  connection: local
-  gather_facts: false
-
   tasks:
     - name: Add environment variable script to profile
       copy:
         dest: "/etc/profile.d/oneapi-env-vars"
         content: |
-          source /opt/intel/oneapi/setvars.sh
+          source . /opt/intel/oneapi/setvars.sh
