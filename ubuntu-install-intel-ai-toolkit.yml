@@ -12,8 +12,8 @@
           - gcc
           - g++
           - make
-      state: latest
-      update_cache: true
+        state: latest
+        update_cache: true
 
 - name: Install Intel AI Toolkit
   hosts: local
