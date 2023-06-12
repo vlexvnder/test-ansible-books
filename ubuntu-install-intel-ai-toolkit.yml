@@ -26,7 +26,7 @@
     - name: Install intel AI kit and other packages
       ansible.builtin.apt:
         pkg:
-          - intel-basekit
+          #- intel-basekit
           - intel-aikit
         state: latest
         update_cache: true
@@ -53,3 +53,5 @@
         dest: "/etc/profile.d/oneapi-env-vars.sh"
         content: |
           source /opt/intel/oneapi/setvars.sh
+    - name: Unconditionally reboot the machine with all defaults
+      ansible.builtin.reboot:
