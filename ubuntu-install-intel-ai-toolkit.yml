@@ -1,4 +1,19 @@
 ---
+- name: Install pre-requisite packages
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install pre-requisite packages
+      ansible.builtin.apt:
+        pkg:
+          - vim
+          - python3-pip
+          - gcc
+          - g++
+          - make
+        state: present
+        update_cache: true
+
 - name: Install Intel AI Toolkit
   hosts: localhost
   connection: local
@@ -13,11 +28,6 @@
         pkg:
           - intel-basekit
           - intel-aikit
-          - vim
-          - python3-pip
-          - gcc
-          - g++
-          - make
         state: latest
         update_cache: true
 
@@ -40,6 +50,6 @@
   tasks:
     - name: Add environment variable script to profile
       copy:
-        dest: "/etc/profile.d/oneapi-env-vars"
+        dest: "/etc/profile.d/oneapi-env-vars.sh"
         content: |
           source . /opt/intel/oneapi/setvars.sh
