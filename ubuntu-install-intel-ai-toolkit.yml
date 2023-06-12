@@ -52,4 +52,4 @@
       copy:
         dest: "/etc/profile.d/oneapi-env-vars.sh"
         content: |
-          source . /opt/intel/oneapi/setvars.sh
+          source /opt/intel/oneapi/setvars.sh
