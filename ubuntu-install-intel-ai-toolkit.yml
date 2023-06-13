@@ -26,9 +26,9 @@
     - name: Install intel AI kit and other packages
       ansible.builtin.apt:
         pkg:
-          #- intel-basekit
+          - intel-basekit
           - intel-aikit
-        state: latest
+        state: present
         update_cache: true
 
 - name: Install miniconda
