@@ -89,7 +89,7 @@
     - name: Install requirements
       pip:
         requirements: "{{ requirements_file }}"
-
+    
     - name: Add script to run demo to home dir
       copy:
         dest: "{{ repo_dest }}/run_demo.sh"
