@@ -89,6 +89,7 @@
         dest: "{{ repo_dest }}/run_demo.sh"
         content: |
           #!/bin/bash
+          python -m pip install notebook
           python -m pip install -r "{{ requirements_file }}"
           python -m pip install transformers 
           conda create --name user_pytorch --clone pytorch
