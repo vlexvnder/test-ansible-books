@@ -57,8 +57,6 @@
         dest: "/etc/profile.d/oneapi-env-vars.sh"
         content: |
           source /opt/intel/oneapi/setvars.sh
-    - name: Unconditionally reboot the machine with all defaults
-      ansible.builtin.reboot:
 
 - name: Install requirements to run demo to demo user
   hosts: localhost
