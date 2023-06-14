@@ -70,7 +70,7 @@
   tasks:
     - name: Touch repo dest
       ansible.builtin.file:
-        path: {{ repo_dest }}
+        path: "{{ repo_dest }}"
         state: directory
     - name: Add script to run demo to home dir
       copy:
