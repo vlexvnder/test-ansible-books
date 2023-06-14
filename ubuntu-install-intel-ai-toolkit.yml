@@ -71,7 +71,7 @@
     - name: Touch repo dest
       ansible.builtin.file:
         path: {{ repo_dest }}
-        state: touch
+        state: directory
     - name: Add script to run demo to home dir
       copy:
         dest: "{{ repo_dest }}/run_demo.sh"
