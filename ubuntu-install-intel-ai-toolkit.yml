@@ -63,35 +63,21 @@
   connection: local
 
   vars:
-    user_name: demo
+    user_name: alexander_goldberg
     repo_url: https://github.com/oneapi-src/oneAPI-samples.git
-    repo_dest: /home/demo/oneAPI-samples
-    example_dir: /home/demo/oneAPI-samples/AI-and-Analytics/Features-and-Functionality/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8
-    requirements_file: /home/demo/oneAPI-samples/AI-and-Analytics/Features-and-Functionality/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8/requirements.txt
-
+    repo_dest: /home/{{ user_name }}/oneAPI-samples
+    demo_folder: /home/{{ user_name }}/oneAPI-samples/AI-and-Analytics/Features-and-Functionality
   tasks:
-    - name: Create demo user
-      user:
-        name: "{{ user_name }}"
-        state: present
-
-    - name: Clone the Git repository
-      git:
-        repo: "{{ repo_url }}"
-        dest: "{{ repo_dest }}"
-
-    - name: Install requirements
-      pip:
-        requirements: "{{ requirements_file }}"
     
     - name: Add script to run demo to home dir
       copy:
         dest: "{{ repo_dest }}/run_demo.sh"
         content: |
           #!/bin/bash
-          python -m pip install notebook
-          python -m pip install -r "{{ requirements_file }}"
+          git clone "{{ repo_url }}" 
+          python -m pip install -r "{{ demo_folder }}/requirements.txt"
           python -m pip install transformers 
           conda create --name user_pytorch --clone pytorch
           conda activate user_pytorch
-          python "{{ example_dir }}/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8.py"
+          python "{{ demo_folder }}/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8.py"
+        mode: a+x
