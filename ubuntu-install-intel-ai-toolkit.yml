@@ -13,7 +13,7 @@
           - make
           - numactl
           - ca-certificates
-          - curl 
+          - curl
           - gnupg
         state: present
         update_cache: true
@@ -23,11 +23,11 @@
   connection: local
   tasks:
     - name: Add Intel GPG key
-      shell: wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB \ | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+      shell: wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
       changed_when: false
     - name: Add Intel OneAPI repo
       shell: echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-    - name: Install intel AI kit and other packages
+    - name: Install Intel AI kit and other packages
       ansible.builtin.apt:
         pkg:
           - intel-basekit
@@ -35,15 +35,15 @@
         state: present
         update_cache: true
 
-- name: Install miniconda
+- name: Install Miniconda
   hosts: localhost
   connection: local
   tasks:
-    - name: Download miniconda
+    - name: Download Miniconda
       shell: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
       args:
         creates: ~/miniconda.sh
-    - name: Install miniconda
+    - name: Install Miniconda
       shell: bash ~/miniconda.sh -b -p $HOME/miniconda
       args:
         creates: $HOME/miniconda
@@ -89,12 +89,11 @@
     - name: Install requirements
       pip:
         requirements: "{{ requirements_file }}"
-    
+
     - name: Add script to run demo to home dir
       copy:
         dest: "{{ repo_dest }}/run_demo.sh"
         content: |
           conda create --name user_pytorch --clone pytorch
           conda activate user_pytorch
-          python {{ example_dir }}/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8.py
-
+          python "{{ example_dir }}/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8.py"
