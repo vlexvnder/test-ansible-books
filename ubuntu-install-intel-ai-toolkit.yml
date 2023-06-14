@@ -90,4 +90,5 @@
         content: |
           conda create --name user_pytorch --clone pytorch
           conda activate user_pytorch
+          python -m pip install -r "{{ requirements_file }}"
           python "{{ example_dir }}/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8.py"
