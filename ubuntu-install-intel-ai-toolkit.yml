@@ -78,7 +78,7 @@
         dest: "{{ repo_dest }}/run_demo.sh"
         content: |
           #!/bin/bash
-          git clone "{{ repo_url }}" 
+          git clone "{{ repo_url }}" "{{ repo_dest }}"
           python -m pip install -r "{{ demo_folder }}/requirements.txt"
           python -m pip install transformers 
           conda create --name user_pytorch --clone pytorch
