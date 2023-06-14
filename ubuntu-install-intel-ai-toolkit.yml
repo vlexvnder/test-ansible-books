@@ -77,10 +77,6 @@
         name: "{{ user_name }}"
         state: present
 
-    - name: Switch to demo user
-      become: yes
-      become_user: "{{ user_name }}"
-
     - name: Clone the Git repository
       git:
         repo: "{{ repo_url }}"
