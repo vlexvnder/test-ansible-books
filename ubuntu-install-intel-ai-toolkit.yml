@@ -11,6 +11,10 @@
           - gcc
           - g++
           - make
+          - numactl
+          - ca-certificates
+          - curl 
+          - gnupg
         state: present
         update_cache: true
 
@@ -55,3 +59,42 @@
           source /opt/intel/oneapi/setvars.sh
     - name: Unconditionally reboot the machine with all defaults
       ansible.builtin.reboot:
+
+- name: Install requirements to run demo to demo user
+  hosts: localhost
+  connection: local
+
+  vars:
+    user_name: demo_user
+    repo_url: https://github.com/oneapi-src/oneAPI-samples.git
+    repo_dest: ~/demo
+    example_dir: ~/demo/oneAPI-samples/AI-and-Analytics/Features-and-Functionality/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8
+    requirements_file: ~/demo/oneAPI-samples/AI-and-Analytics/Features-and-Functionality/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8/requirements.txt
+
+  tasks:
+    - name: Create demo user
+      user:
+        name: "{{ user_name }}"
+        state: present
+
+    - name: Switch to demo user
+      become: yes
+      become_user: "{{ user_name }}"
+
+    - name: Clone the Git repository
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ repo_dest }}"
+
+    - name: Install requirements
+      pip:
+        requirements: "{{ requirements_file }}"
+    
+    - name: Add script to run demo to home dir
+      copy:
+        dest: "{{ repo_dest }}/run_demo.sh"
+        content: |
+          conda create --name user_pytorch --clone pytorch
+          conda activate user_pytorch
+          python {{ example_dir }}/IntelPyTorch_InferenceOptimizations_AMX_BF16_INT8.py
+
