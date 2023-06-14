@@ -68,7 +68,10 @@
     repo_dest: /home/{{ user_name }}/oneAPI-samples
     demo_folder: /home/{{ user_name }}/oneAPI-samples/AI-and-Analytics/Features-and-Functionality
   tasks:
-    
+    - name: Touch repo dest
+      ansible.builtin.file:
+        path: {{ repo_dest }}
+        state: touch
     - name: Add script to run demo to home dir
       copy:
         dest: "{{ repo_dest }}/run_demo.sh"
