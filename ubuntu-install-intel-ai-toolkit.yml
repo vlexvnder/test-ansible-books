@@ -66,7 +66,7 @@
     user_name: alexander_goldberg
     repo_url: https://github.com/oneapi-src/oneAPI-samples.git
     repo_dest: /home/{{ user_name }}/oneAPI-samples
-    demo_folder: {{ repo_dest }}/oneAPI-samples/AI-and-Analytics/Features-and-Functionality
+    demo_folder: "{{ repo_dest }}"/oneAPI-samples/AI-and-Analytics/Features-and-Functionality
   tasks:
     - name: Touch repo dest
       ansible.builtin.file:
