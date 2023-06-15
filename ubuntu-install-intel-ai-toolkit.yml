@@ -70,7 +70,7 @@
   tasks:
     - name: Create demo user
       ansible.builtin.user:
-        name: {{ user_name }}
+        name: "{{ user_name }}"
     - name: Touch repo dest
       ansible.builtin.file:
         path: "{{ repo_dest }}"
