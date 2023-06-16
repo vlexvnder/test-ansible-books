@@ -84,6 +84,6 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Run demo
+    - name: Reboot server
       shell: reboot
 
