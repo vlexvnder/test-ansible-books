@@ -3,6 +3,10 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: Add apt-fast repository
+      ansible.builtin.apt_repository:
+      repo: 'ppa:apt-fast/stable'
+      state: present
     - name: Install pre-requisite packages
       ansible.builtin.apt:
         pkg:
@@ -15,6 +19,7 @@
           - ca-certificates
           - curl
           - gnupg
+          - apt-fast
         state: present
         update_cache: true
 
@@ -33,7 +38,6 @@
           - intel-basekit
           - intel-aikit
         state: present
-        update_cache: true
 
 - name: Install Miniconda
   hosts: localhost
