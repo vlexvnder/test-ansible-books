@@ -36,7 +36,7 @@
     - name: Install intel base kit
       shell: apt-fast update && DEBIAN_FRONTEND=noninteractive apt-fast install -yq intel-basekit
     - name: Install intel AI kit
-      shell: apt-fast update && DEBIAN_FRONTEND=noninteractive apt-fast -yq install intel-aikit
+      shell: DEBIAN_FRONTEND=noninteractive apt-fast -yq install intel-aikit
 
 - name: Install Miniconda
   hosts: localhost
