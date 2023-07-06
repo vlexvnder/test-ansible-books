@@ -5,8 +5,8 @@
   tasks:
     - name: Add apt-fast repository
       ansible.builtin.apt_repository:
-      repo: 'ppa:apt-fast/stable'
-      state: present
+        repo: 'ppa:apt-fast/stable'
+        state: present
     - name: Install pre-requisite packages
       ansible.builtin.apt:
         pkg:
