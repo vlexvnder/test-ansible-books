@@ -1,0 +1,28 @@
+---
+- name: Install pre-requisite packages
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install pre-requisite packages
+      ansible.builtin.apt:
+        pkg:
+          - python3-pip
+        state: present
+        update_cache: true
+
+- name: Install fschat with pip
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install fschat
+      pip:
+        name: fschat
+        state: present
+        executable: pip3
+
+- name: Serve Falcon on CPU 
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Serve Falcon on CPU
+      shell: python-3 -m fastchat.serve.cli --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu
