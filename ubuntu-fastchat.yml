@@ -24,7 +24,10 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Start web controller
-      shell: python3 -m fastchat.serve.controller
     - name: Serve Falcon on CPU
-      shell: python3 -m fastchat.serve.cli --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu
+      shell: python3 -m fastchat.serve.model_worker --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu --port 3000
+
+
+     # python3 -m fastchat.serve.test_message --model-name lmsys/fastchat-t5-3b-v1.0 
+     #    - name: Start web controller shell: python3 -m fastchat.serve.controller --port 3001
+     # python3 -m fastchat.serve.gradio_web_server--port 3002
