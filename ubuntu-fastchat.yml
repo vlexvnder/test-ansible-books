@@ -24,5 +24,7 @@
   hosts: localhost
   connection: local
   tasks:
+    - name: Start web controller
+      shell: python3 -m fastchat.serve.controller
     - name: Serve Falcon on CPU
-      shell: python-3 -m fastchat.serve.cli --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu
+      shell: python3 -m fastchat.serve.cli --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu
