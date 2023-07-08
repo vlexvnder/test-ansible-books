@@ -45,10 +45,3 @@
       shell: nohup python3 -m fastchat.serve.controller </dev/null >/dev/null 2>&1 & 
     - name: Serve Falcon on CPU
       shell: sleep 10 & nohup python3 -m fastchat.serve.model_worker --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu </dev/null >/dev/null 2>&1 & 
-
-    
-
-
-     # python3 -m fastchat.serve.test_message --model-name lmsys/fastchat-t5-3b-v1.0 
-     #    - name: Start web controller shell: python3 -m fastchat.serve.controller --port 3001
-     # python3 -m fastchat.serve.gradio_web_server--port 3002
