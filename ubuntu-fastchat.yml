@@ -24,17 +24,6 @@
         name: pydantic==1.10.10
         state: present
         executable: pip3
-    - name: downgrade gradio (hack to fix installation)
-      pip:
-        name: gradio==3.10
-        state: present
-        executable: pip3
-    - name: Upgrade gradio again
-      pip:
-        name: gradio==3.35.2
-        state: present
-        executable: pip3
-        
 
 - name: Serve Falcon on CPU 
   hosts: localhost
@@ -45,3 +34,18 @@
       shell: nohup python3 -m fastchat.serve.controller </dev/null >/dev/null 2>&1 & 
     - name: Serve Falcon on CPU
       shell: sleep 10 & nohup python3 -m fastchat.serve.model_worker --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu </dev/null >/dev/null 2>&1 & 
+
+- name: Make gradio work with sharing
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: downgrade gradio (hack to fix installation)
+      pip:
+        name: gradio==3.10
+        state: present
+        executable: pip3
+    - name: Upgrade gradio again
+      pip:
+        name: gradio==3.35.2
+        state: present
+        executable: pip3
