@@ -24,6 +24,16 @@
         name: pydantic==1.10.10
         state: present
         executable: pip3
+    - name: downgrade gradio (hack to fix installation)
+      pip:
+        name: gradio==3.10
+        state: present
+        executable: pip3
+    - name: Upgrade gradio again
+      pip:
+        name: gradio==3.35.2
+        state: present
+        executable: pip3
         
 
 - name: Serve Falcon on CPU 
