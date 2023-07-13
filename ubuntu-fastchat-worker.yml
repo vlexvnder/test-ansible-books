@@ -19,7 +19,6 @@
           - ca-certificates
           - curl
           - gnupg
-          - apt-fast
         state: present
         update_cache: true
 
@@ -32,10 +31,15 @@
       changed_when: false
     - name: Add Intel OneAPI repo
       shell: echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-    - name: Install pre-requisite packages
+    - name: Install base kit
       ansible.builtin.apt:
         pkg:
           - intel-basekit
+        state: present
+        update_cache: true
+    - name: Install ai kit
+      ansible.builtin.apt:
+        pkg:
           - intel-aikit
         state: present
         update_cache: true
