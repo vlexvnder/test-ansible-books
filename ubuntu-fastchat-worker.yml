@@ -1,0 +1,29 @@
+---
+- name: Install pre-requisite packages
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install pre-requisite packages
+      ansible.builtin.apt:
+        pkg:
+          - python3-pip
+        state: present
+        update_cache: true
+
+- name: Install fschat with pip
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Install fschat
+      pip:
+        name: fschat
+        state: present
+        executable: pip3
+    - name: Install pydantic version 1.10.10
+      pip:
+        name: pydantic==1.10.10
+        state: present
+        executable: pip3
+
+
+
