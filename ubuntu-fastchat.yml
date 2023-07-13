@@ -19,6 +19,11 @@
         name: fschat
         state: present
         executable: pip3
+    - name: Install plotly
+      pip:
+        name: plotly
+        state: present
+        executable: pip3
     - name: Install pydantic version 1.10.10
       pip:
         name: pydantic==1.10.10
@@ -35,3 +40,7 @@
       shell: nohup python3 -m fastchat.serve.controller --host 0.0.0.0 </dev/null >/dev/null 2>&1 & 
     - name: Serve Falcon on CPU
       shell: sleep 10 & nohup python3 -m fastchat.serve.model_worker --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu </dev/null >/dev/null 2>&1 & 
+
+
+# --model-path 
+# python3 -m fastchat.serve.model_worker --model-path lmsys/longchat-7b-16k --device cpu --host 0.0.0.0 --controller-address http://10.128.15.193:21001
