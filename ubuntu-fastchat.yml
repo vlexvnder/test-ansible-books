@@ -39,7 +39,24 @@
     - name: Start web controller shell
       shell: nohup python3 -m fastchat.serve.controller --host 0.0.0.0 </dev/null >/dev/null 2>&1 & 
     - name: Serve Falcon on CPU
-      shell: sleep 10 & nohup python3 -m fastchat.serve.model_worker --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu </dev/null >/dev/null 2>&1 & 
+      shell: sleep 10 & nohup python3 -m fastchat.serve.model_worker --model-path lmsys/fastchat-t5-3b-v1.0 --device cpu  --model-name xeon-4 --port 21004 --worker-address http://localhost:21004 </dev/null >/dev/null 2>&1 & 
+
+- name: Fix broken gradio 
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Run server
+      shell: nohup python3 -m fastchat.serve.gradio_web_server_multi --share
+    - name: downgrade gradio
+      pip:
+        name: gradio==3.10
+        state: present
+        executable: pip3
+    - name: upgrade gradio
+      pip:
+        name: gradio==3.35.2
+        state: present
+        executable: pip3
 
 
 # --model-path 
