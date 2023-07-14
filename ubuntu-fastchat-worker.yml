@@ -35,11 +35,4 @@
         state: present
         executable: pip3
 
-- name: Reboot server
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Reboot server
-      shell: reboot
-
 
