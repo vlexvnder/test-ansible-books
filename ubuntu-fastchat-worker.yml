@@ -3,68 +3,12 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Add apt-fast repository
-      ansible.builtin.apt_repository:
-        repo: 'ppa:apt-fast/stable'
-        state: present
     - name: Install pre-requisite packages
       ansible.builtin.apt:
         pkg:
-          - vim
           - python3-pip
-          - gcc
-          - g++
-          - make
-          - numactl
-          - ca-certificates
-          - curl
-          - gnupg
         state: present
         update_cache: true
-
-- name: Install Intel AI Toolkit
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Add Intel GPG key
-      shell: wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | sudo tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
-      changed_when: false
-    - name: Add Intel OneAPI repo
-      shell: echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
-    - name: Install base kit
-      ansible.builtin.apt:
-        pkg:
-          - intel-basekit
-        state: present
-        update_cache: true
-    - name: Install ai kit
-      ansible.builtin.apt:
-        pkg:
-          - intel-aikit
-        state: present
-        update_cache: true
-- name: Install Miniconda
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Download Miniconda
-      shell: wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
-      args:
-        creates: ~/miniconda.sh
-    - name: Install Miniconda
-      shell: bash ~/miniconda.sh -b -p $HOME/miniconda
-      args:
-        creates: $HOME/miniconda
-
-- name: Set environment variables
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Add environment variable script to profile
-      copy:
-        dest: "/etc/profile.d/oneapi-env-vars.sh"
-        content: |
-          source /opt/intel/oneapi/setvars.sh
 
 - name: Install fschat with pip
   hosts: localhost
@@ -83,6 +27,11 @@
     - name: Install pydantic version 1.10.10
       pip:
         name: pydantic==1.10.10
+        state: present
+        executable: pip3
+    - name: Install Intel pytorch
+      pip:
+        name: intel_extension_for_pytorch
         state: present
         executable: pip3
 
