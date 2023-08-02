@@ -36,7 +36,6 @@
       ansible.builtin.git:
         repo: https://github.com/intel/qatlib.git
         dest: /tmp/qat
-        version: 23.02.0
     - name: Build qat
       shell: /tmp/qat/autogen.sh #&& source ./configure --enable-service && make -j && make install
 
