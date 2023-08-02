@@ -38,6 +38,6 @@
         dest: /tmp/qat
         version: 23.02.0
     - name: Build qat
-      shell: cd /tmp/qat/ && ./autogen.sh && ./configure --enable-service && make -j && make install
+      shell: cd /tmp/qat/ && ./autogen.sh #&& source ./configure --enable-service && make -j && make install
 
 
