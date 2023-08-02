@@ -11,12 +11,11 @@
         pkg:
           - git
           - libsystemd-dev
-          - pciutils-dev
           - libudev-dev
           - libreadline6-dev
           - pkg-config
           - libxml2-dev
-          - pciutils-dev
+          #- pciutils-dev
           - libboost-all-dev
           - libelf-dev
           - libnl-3-dev
