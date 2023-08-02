@@ -42,7 +42,7 @@
       args:
         chdir: /tmp/qat
     - name: Run configure
-      shell: ./configure --enable-service
+      shell: ./configure --enable-service && make -j && make install
       args:
         chdir: /tmp/qat
 
