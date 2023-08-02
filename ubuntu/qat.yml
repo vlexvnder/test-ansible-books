@@ -16,7 +16,7 @@
           - pkg-config
           - libxml2-dev
           - nasm
-          #- pciutils-dev
+          - pciutils
           - libboost-all-dev
           - libelf-dev
           - libnl-3-dev
