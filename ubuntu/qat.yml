@@ -19,7 +19,7 @@
           - libboost-all-dev
           - libelf-dev
           - libnl-3-dev
-          - kernel-devel-$(uname -r)
+          #- kernel-devel-$(uname -r)
           - build-essential
           - yasm
           - zlib1g-dev
