@@ -37,7 +37,11 @@
         repo: https://github.com/intel/qatlib.git
         dest: /tmp/qat
     - name: Build qat
-      shell: ./autogen.sh && ./configure --enable-service && make -j && make install
+      shell: ./autogen.sh
       args:
-        chdir:  /tmp/qat
+        chdir: /tmp/qat
+    - name: Build qat
+      shell: ./configure --enable-service
+      args:
+        chdir: /tmp/qat
 
