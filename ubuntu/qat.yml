@@ -15,6 +15,7 @@
           - libreadline6-dev
           - pkg-config
           - libxml2-dev
+          - nasm
           #- pciutils-dev
           - libboost-all-dev
           - libelf-dev
@@ -36,11 +37,11 @@
       ansible.builtin.git:
         repo: https://github.com/intel/qatlib.git
         dest: /tmp/qat
-    - name: Build qat
+    - name: Run autogen
       shell: ./autogen.sh
       args:
         chdir: /tmp/qat
-    - name: Build qat
+    - name: Run configure
       shell: ./configure --enable-service
       args:
         chdir: /tmp/qat
