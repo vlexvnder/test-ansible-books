@@ -34,7 +34,8 @@
               "listen_port": 9000,
               "listen_to_network": true
             }
-          }       
+          }
+        mode: 0644       
     - name: Install Easy-Diffusion
       shell: /usr/local/bin/easy-diffusion/start.sh
 
