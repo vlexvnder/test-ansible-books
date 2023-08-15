@@ -25,6 +25,16 @@
         src:  https://github.com/easydiffusion/easydiffusion/releases/download/v2.5.41a/Easy-Diffusion-Linux.zip
         dest: /usr/local/bin
         remote_src: yes
+    - name: Add config file for Easy-Diffusion
+      copy:
+        dest: "/usr/local/bin/easy-diffusion/scripts/config.json"
+        content: |
+          {
+            "net": {
+              "listen_port": 9000,
+              "listen_to_network": true
+            }
+          }       
     - name: Install Easy-Diffusion
-      shell: /usr/local/bin/Easy-Diffusion-Linux/start.sh
+      shell: /usr/local/bin/easy-diffusion/start.sh
 
